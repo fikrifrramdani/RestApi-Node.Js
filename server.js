@@ -8,17 +8,17 @@ const db = require("./app/models");
 const app = express();
 
 let whiteList = [
-    'http://localhost:8081'
+  'http://localhost:8081'
 ];
 
 let corsoption = {
-    origin: function (origin, callback) {
-        if (whiteList.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not Allowed by CORS'));
-        }
+  origin: function (origin, callback) {
+    if (whiteList.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not Allowed by CORS'));
     }
+  }
 }
 app.use(cors(corsoption));
 
@@ -31,9 +31,9 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-    res.json({
-        message: "Welcome To My API"
-    });
+  res.json({
+    message: "Welcome To My API"
+  });
 });
 
 // Posts route
@@ -42,5 +42,5 @@ require("./app/routes/post.route")(app);
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
